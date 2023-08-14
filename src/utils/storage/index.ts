@@ -1,5 +1,8 @@
+// 用于描述存储在本地存储中的数据的结构。
 interface StorageData<T = any> {
+  // 存储在本地存储中的实际数据
   data: T
+  // 数据的过期时间（可选）。
   expire: number | null
 }
 
@@ -13,7 +16,6 @@ export function createLocalStorage(options?: { expire?: number | null }) {
       data,
       expire: expire !== null ? new Date().getTime() + expire * 1000 : null,
     }
-
     const json = JSON.stringify(storageData)
     window.localStorage.setItem(key, json)
   }
